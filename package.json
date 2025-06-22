@@ -13,8 +13,11 @@
     "schema": "src/db/schema.prisma"
   },
   "dependencies": {
+    "@google/genai": "^1.6.0",
     "@prisma/client": "^6.10.1",
     "@prisma/extension-accelerate": "^2.0.1",
+    "@radix-ui/react-alert-dialog": "^1.1.14",
+    "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-separator": "^1.1.7",
@@ -24,13 +27,15 @@
     "@supabase/supabase-js": "^2.50.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "fuse.js": "^7.1.0",
     "lucide-react": "^0.522.0",
     "next": "15.3.4",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sonner": "^2.0.5",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

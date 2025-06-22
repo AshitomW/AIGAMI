@@ -36,6 +36,21 @@ export async function updateSession(request: NextRequest) {
 
   // IMPORTANT: DO NOT REMOVE auth.getUser()
 
+  const isAuthRoute =
+    request.nextUrl.pathname === "/auth/signin" ||
+    request.nextUrl.pathname === "/signup";
+
+  if (isAuthRoute) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      return NextResponse.redirect(
+        new URL("/dashboard", process.env.NEXT_PUBLIC_BASE_URL)
+      );
+    }
+  }
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
