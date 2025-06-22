@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Note {
+  id        String     @id @default(uuid())
+  text      String
+  author    User       @relation(fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt @default(now())
+}
+
+model User {
+  id    String         @id @default(uuid())
+  email String         @unique
+  notes Note[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt @default(now())
+  avatarUrl String    @default("https://pplx-res.cloudinary.com/image/upload/v1750508474/gpt4o_images/u9mge1he70nliekq4que.png")
+}
