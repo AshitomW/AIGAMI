@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import { AUTH_TYPE } from "@/constants";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { signInAction, signUpAction } from "@/lib/actions/auth";
 
 interface AuthFormProps {
   auth_type: AUTH_TYPE;
@@ -35,6 +38,8 @@ export default function AuthForm({ auth_type }: AuthFormProps) {
     formData.password === formData.confirmPassword &&
     formData.confirmPassword !== "";
 
+  const isFormValid = !isSignUp || (passwordsMatch && isPasswordStrong);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -42,10 +47,33 @@ export default function AuthForm({ auth_type }: AuthFormProps) {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement authentication logic
-    console.log("Form submitted:", formData);
+  const router = useRouter();
+  const handleSubmit = (formData: FormData) => {
+    startTransition(async function () {
+      const email = formData.get("email") as string;
+      const password = formData.get("password") as string;
+
+      let errorMessage;
+      let titleMessage;
+      let description;
+
+      if (auth_type == AUTH_TYPE.SIGN_IN) {
+        errorMessage = (await signInAction(email, password)).errorMessage;
+        titleMessage = "Logged In";
+        description = "You have been successfully logged in";
+      } else {
+        errorMessage = (await signUpAction(email, password)).errorMessage;
+        titleMessage = "Signed Up Successfully";
+        description = "You have been successfully signed up in";
+      }
+
+      if (!errorMessage) {
+        toast.success(title, { description });
+        router.replace("/dashboard");
+      } else {
+        toast.error(title, { description: errorMessage });
+      }
+    });
   };
 
   return (
@@ -55,7 +83,7 @@ export default function AuthForm({ auth_type }: AuthFormProps) {
         <p className="text-gray-600 mt-2">{description}</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form action={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
           <Input
@@ -126,9 +154,11 @@ export default function AuthForm({ auth_type }: AuthFormProps) {
           </div>
         )}
 
-        <Button type="submit" className="w-full">
-          {isSignUp ? "Create Account" : "Sign In"}
-        </Button>
+        <div className="pt-2">
+          <Button type="submit" className="w-full" disabled={!isFormValid}>
+            {isSignUp ? "Create Account" : "Sign In"}
+          </Button>
+        </div>
       </form>
 
       <div className="mt-6 text-center text-sm">
