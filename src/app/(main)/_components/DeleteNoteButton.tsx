@@ -37,7 +37,7 @@ export default function DeleteNoteButton({ noteId, deleteNoteLocally }: Props) {
         deleteNoteLocally(noteId);
 
         if (noteId === noteIdParam) {
-          router.replace("/dashboard");
+          router.replace("/notes");
         }
       } else {
         toast.error("Something Wrong Happened", {

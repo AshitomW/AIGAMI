@@ -49,10 +49,7 @@ export default function SelectNoteButton({ note }: Props) {
         note.id === noteId ? "bg-sidebar-accent/50" : ""
       }`}
     >
-      <Link
-        href={`/dashboard/?noteId=${note.id}`}
-        className="flex h-fit flex-col"
-      >
+      <Link href={`/notes/?noteId=${note.id}`} className="flex h-fit flex-col">
         <p className="w-full overflow-hidden truncate text-ellipsis whitespace-nowrap">
           {noteText}
         </p>
