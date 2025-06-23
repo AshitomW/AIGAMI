@@ -30,8 +30,7 @@ export async function getCharacterCount() {
       },
     });
     const totalCharacters = notes.reduce((sum, note) => {
-      const contentWithoutSpaces = note.text.replace(/\s/g, "");
-      return sum + contentWithoutSpaces.length;
+      return sum + note.text.length;
     }, 0);
 
     return totalCharacters;

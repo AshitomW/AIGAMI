@@ -34,7 +34,7 @@ export default async function page() {
             {/* Top Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Total Notes */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+              <div className="bg-white rounded-md p-8 shadow-lg border border-gray-100">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-500 mb-2">
@@ -47,7 +47,7 @@ export default async function page() {
                       Your digital collection
                     </p>
                   </div>
-                  <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center">
+                  <div className="w-14 h-14 bg-blue-100 rounded-md flex items-center justify-center">
                     <svg
                       className="w-7 h-7 text-blue-600"
                       fill="none"
@@ -66,7 +66,7 @@ export default async function page() {
               </div>
 
               {/* Characters */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+              <div className="bg-white rounded-md p-8 shadow-lg border border-gray-100">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-500 mb-2">
@@ -79,7 +79,7 @@ export default async function page() {
                     </p>
                     <p className="text-sm text-gray-600">Characters captured</p>
                   </div>
-                  <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center">
+                  <div className="w-14 h-14 bg-green-100 rounded-md flex items-center justify-center">
                     <svg
                       className="w-7 h-7 text-green-600"
                       fill="none"
@@ -99,7 +99,7 @@ export default async function page() {
             </div>
 
             {/* Activity Chart */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+            <div className="bg-white rounded-md p-8 shadow-lg border border-gray-100">
               <h3 className="text-lg font-semibold text-gray-900 mb-6">
                 Weekly Activity
               </h3>
@@ -117,7 +117,7 @@ export default async function page() {
                       ></div>
                       <p className="text-xs text-gray-500 mt-2">{day}</p>
                     </div>
-                  ),
+                  )
                 )}
               </div>
             </div>
@@ -126,7 +126,7 @@ export default async function page() {
           {/* Sidebar Stats */}
           <div className="col-span-12 lg:col-span-4 space-y-6">
             {/* Today's Progress */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+            <div className="bg-white rounded-md p-6 shadow-lg border border-gray-100">
               <div className="text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg
@@ -154,7 +154,7 @@ export default async function page() {
             </div>
 
             {/* This Week */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+            <div className="bg-white rounded-md p-6 shadow-lg border border-gray-100">
               <div className="text-center">
                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -10,12 +10,14 @@ export const metadata: Metadata = {
 
 const inter = Inter({ subsets: ["latin"] });
 
+const jSans = Josefin_Sans({ subsets: ["latin"] });
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${jSans.className} antialiased`}>
         <Toaster position="top-center" />
         {children}
       </body>

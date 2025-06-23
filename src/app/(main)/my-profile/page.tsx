@@ -104,7 +104,7 @@ export default function MyProfilePage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+        <div className="bg-white p-8 rounded-md shadow-lg text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto mb-3"></div>
           <div className="text-gray-600">Loading profile...</div>
         </div>
@@ -117,7 +117,7 @@ export default function MyProfilePage() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div className="bg-white p-6 rounded-md shadow-sm border border-gray-200">
             <h1 className="text-3xl font-bold text-black">My Profile</h1>
             <p className="text-gray-600 text-sm mt-1">
               Your writing statistics and achievements
@@ -126,7 +126,7 @@ export default function MyProfilePage() {
         </div>
 
         {/* Profile Info */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 mb-6">
+        <div className="bg-white p-6 rounded-md shadow-sm border border-gray-200 mb-6">
           <div className="flex items-center space-x-4">
             <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center">
               <span className="text-white text-xl font-bold">
@@ -149,7 +149,7 @@ export default function MyProfilePage() {
           <>
             {/* Rankings */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="bg-white p-6 rounded-md shadow-sm border border-gray-200">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-semibold text-gray-900">
                     Characters Rank
@@ -170,7 +170,7 @@ export default function MyProfilePage() {
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="bg-white p-6 rounded-md shadow-sm border border-gray-200">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-semibold text-gray-900">Streak Rank</h3>
                   <span className="text-lg">
@@ -189,7 +189,7 @@ export default function MyProfilePage() {
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="bg-white p-6 rounded-md shadow-sm border border-gray-200">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-semibold text-gray-900">Notes Rank</h3>
                   <span className="text-lg">
@@ -211,7 +211,7 @@ export default function MyProfilePage() {
 
             {/* Statistics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="bg-white p-6 rounded-md shadow-sm border border-gray-200">
                 <h3 className="font-semibold text-gray-900 mb-2">
                   Total Characters
                 </h3>
@@ -223,7 +223,7 @@ export default function MyProfilePage() {
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="bg-white p-6 rounded-md shadow-sm border border-gray-200">
                 <h3 className="font-semibold text-gray-900 mb-2">
                   Current Streak
                 </h3>
@@ -233,7 +233,7 @@ export default function MyProfilePage() {
                 <div className="text-gray-500 text-sm mt-1">days in a row</div>
               </div>
 
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="bg-white p-6 rounded-md shadow-sm border border-gray-200">
                 <h3 className="font-semibold text-gray-900 mb-2">
                   Total Notes
                 </h3>
@@ -245,7 +245,7 @@ export default function MyProfilePage() {
             </div>
           </>
         ) : (
-          <div className="bg-white p-12 rounded-xl shadow-sm border border-gray-200 text-center">
+          <div className="bg-white p-12 rounded-md shadow-sm border border-gray-200 text-center">
             <div className="text-gray-600 mb-2 text-lg">No data found</div>
             <div className="text-gray-500 text-sm">
               Start creating notes to see your profile statistics!
