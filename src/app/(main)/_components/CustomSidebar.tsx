@@ -13,6 +13,11 @@ const navigationItems = [
     icon: Home,
   },
   {
+    name: "My Notes",
+    href: "/notes",
+    icon: FileText,
+  },
+  {
     name: "My Profile",
     href: "/my-profile",
     icon: UserCircle,
@@ -21,11 +26,6 @@ const navigationItems = [
     name: "Leaderboards",
     href: "/leaderboards",
     icon: Trophy,
-  },
-  {
-    name: "My Notes",
-    href: "/notes",
-    icon: FileText,
   },
 ];
 
@@ -63,12 +63,16 @@ export default function CustomSidebar() {
   };
 
   return (
-    <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
+    <div className="w-64 top-0 left-0 fixed h-screen  bg-white border-r border-gray-200 flex flex-col">
       {/* Profile Header */}
       <div className="p-6 border-b border-gray-200">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-            <User className="w-6 h-6 text-gray-600" />
+          <div className="w-10 h-10 rounded-full overflow-hidden">
+            <img
+              src="https://pplx-res.cloudinary.com/image/upload/v1750508474/gpt4o_images/u9mge1he70nliekq4que.png"
+              alt="Profile avatar"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             {loading ? (
@@ -103,9 +107,9 @@ export default function CustomSidebar() {
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={`flex items-center px-4 py-3 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex  items-center px-4 py-3 rounded-md text-sm font-bold transition-colors ${
                     isActive
-                      ? "bg-gray-100 text-gray-900"
+                      ? "bg-gray-100  text-gray-900"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   }`}
                 >
@@ -119,13 +123,13 @@ export default function CustomSidebar() {
       </nav>
 
       {/* Logout Button */}
-      <div className="p-4 border-t border-gray-200">
+      <div className="p-4   border-t border-gray-200">
         <button
           onClick={handleLogout}
           className="flex items-center w-full px-4 py-3 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
         >
           <LogOut className="w-5 h-5 mr-3" />
-          Logout
+          <span className="text-red-500">Log Out</span>
         </button>
       </div>
     </div>

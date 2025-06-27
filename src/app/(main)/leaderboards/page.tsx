@@ -18,6 +18,7 @@ import {
   Users,
   BookOpen,
 } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 type LeaderboardType = "characters" | "streak" | "notes";
 
@@ -124,7 +125,7 @@ export default function LeaderboardsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-8">
+      <div className="min-h-screen py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center items-center h-64">
             <div className="text-center">
@@ -140,7 +141,7 @@ export default function LeaderboardsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen  py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -226,8 +227,16 @@ export default function LeaderboardsPage() {
                           </div>
 
                           {/* Avatar */}
-                          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
-                            <User className="w-6 h-6 text-white" />
+                          <div className="flex-shrink-0">
+                            <Avatar className="w-12 h-12">
+                              <AvatarImage
+                                src="https://pplx-res.cloudinary.com/image/upload/v1750508474/gpt4o_images/u9mge1he70nliekq4que.png"
+                                alt={`${getUserDisplayName(user)} avatar`}
+                              />
+                              <AvatarFallback className="bg-gradient-to-br from-blue-400 to-blue-600 text-white">
+                                <User className="w-6 h-6" />
+                              </AvatarFallback>
+                            </Avatar>
                           </div>
 
                           {/* User Info */}

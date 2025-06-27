@@ -1,16 +1,9 @@
 import { getUserStatistics } from "@/lib/actions/userStatistics";
 import React from "react";
 
-export default async function page() {
-  // Mock data - replace with actual data from your backend
-  const userStats = {
-    totalNotes: 47,
-    totalCharacters: 12847,
-    notesToday: 3,
-    weeklyActivity: 15,
-    lastActive: "2 hours ago",
-  };
+export const revalidate = 3600;
 
+export default async function page() {
   const statistics = await getUserStatistics();
   console.log(statistics);
 

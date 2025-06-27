@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <NoteProvider>
       <div className="flex min-h-screen">
         <CustomSidebar />
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 pl-64 p-6">{children}</main>
       </div>
     </NoteProvider>
   );

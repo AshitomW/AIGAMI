@@ -103,7 +103,7 @@ export default function MyProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen  flex items-center justify-center">
         <div className="bg-white p-8 rounded-md shadow-lg text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto mb-3"></div>
           <div className="text-gray-600">Loading profile...</div>
@@ -113,7 +113,7 @@ export default function MyProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen  p-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -128,10 +128,12 @@ export default function MyProfilePage() {
         {/* Profile Info */}
         <div className="bg-white p-6 rounded-md shadow-sm border border-gray-200 mb-6">
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center">
-              <span className="text-white text-xl font-bold">
-                {getUserDisplayName().charAt(0).toUpperCase()}
-              </span>
+            <div className="w-16 h-16 rounded-full overflow-hidden">
+              <img
+                src="https://pplx-res.cloudinary.com/image/upload/v1750508474/gpt4o_images/u9mge1he70nliekq4que.png"
+                alt="Profile avatar"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <h2 className="text-xl font-bold text-black">
