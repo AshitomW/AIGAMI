@@ -5,6 +5,7 @@ import AIChat from "../_components/AIChat";
 import NewNoteButton from "../_components/NewNoteButton";
 import NoteTextInput from "../_components/NoteTextInput";
 import NotesListWithSearch from "../_components/NotesListWithSearch";
+import OCRImportButton from "../_components/OCRImportButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -36,6 +37,7 @@ export default async function page({ searchParams }: Props) {
     return (
       <div className="flex h-full flex-col items-center gap-4">
         <div className="flex w-full justify-end gap-2">
+          <OCRImportButton />
           <AIChat user={user} />
           <NewNoteButton user={user} />
         </div>
@@ -62,6 +64,7 @@ export default async function page({ searchParams }: Props) {
           </Link>
         </Button>
         <div className="flex gap-2">
+          <OCRImportButton />
           <AIChat user={user} />
           <NewNoteButton user={user} />
         </div>
