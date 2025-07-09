@@ -17,8 +17,14 @@ export async function extractTextFromDocument(formData: FormData) {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || "Failed to extract text");
+      let errorMessage = "Failed to extract text";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.error || errorMessage;
+      } catch {
+        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
     }
 
     const result = await response.json();
@@ -38,12 +44,62 @@ export async function extractTextFromDocument(formData: FormData) {
   }
 }
 
-export async function createNoteFromOCR(text: string, filename: string) {
+export async function extractTextFromURL(url: string) {
+  const user = await getUser();
+  if (!user) throw new Error("Log in to use OCR features");
+
+  try {
+    const response = await fetch(`${OCR_API_URL}/extract-from-url`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url }),
+    });
+
+    if (!response.ok) {
+      let errorMessage = "Failed to extract text from URL";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.error || errorMessage;
+      } catch {
+        errorMessage = `Server error: ${response.status} ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
+    }
+
+    const result = await response.json();
+    return {
+      success: true,
+      text: result.text,
+      filename:
+        result.filename ||
+        new URL(url).pathname.split("/").pop() ||
+        "url-document",
+      characterCount: result.character_count,
+      wordCount: result.word_count,
+      confidence: result.confidence,
+      url: url,
+    };
+  } catch (error) {
+    console.error("OCR URL Error:", error);
+    throw new Error(
+      error instanceof Error ? error.message : "Failed to process URL"
+    );
+  }
+}
+
+export async function createNoteFromOCR(
+  text: string,
+  filename: string,
+  sourceUrl?: string
+) {
   const user = await getUser();
   if (!user) throw new Error("Log in to create notes");
 
   const noteId = uuidv4();
-  const noteText = `# Imported from: ${filename}\n\n${text}`;
+  const source = sourceUrl ? `URL: ${sourceUrl}` : filename;
+  const noteText = `# Imported from: ${source}\n\n${text}`;
 
   // Create the note first
   const result = await createNoteAction(noteId);

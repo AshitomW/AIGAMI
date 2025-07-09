@@ -146,7 +146,7 @@ def extract_text():
         return jsonify({"error": f"Processing failed: {str(e)}"}), 500
 
 
-@app.route("/extract-text-url", methods=["POST"])
+@app.route("/extract-from-url", methods=["POST"])
 def extract_text_from_url():
     """Extract text from image URL"""
     try:
@@ -155,12 +155,22 @@ def extract_text_from_url():
             return jsonify({"error": "URL is required"}), 400
 
         url = data["url"]
+        logger.info(f"Processing URL: {url}")
 
         # Download and process image from URL
         import requests
 
-        response = requests.get(url, timeout=30)
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        
+        response = requests.get(url, timeout=30, headers=headers)
         response.raise_for_status()
+
+        # Check if the response is actually an image
+        content_type = response.headers.get('content-type', '').lower()
+        if not any(img_type in content_type for img_type in ['image', 'pdf']):
+            return jsonify({"error": "URL does not point to a valid image or PDF file"}), 400
 
         # Open image from response content
         image = Image.open(io.BytesIO(response.content))
@@ -169,16 +179,39 @@ def extract_text_from_url():
 
         text = extract_text_from_image(image)
 
-        return jsonify(
-            {
-                "url": url,
-                "text": text,
-                "character_count": len(text),
-                "word_count": len(text.split()) if text else 0,
-            }
-        )
+        # Try to get filename from URL
+        import os
+        filename = os.path.basename(url.split('?')[0]) or "url-document"
+
+        response_data = {
+            "url": url,
+            "filename": filename,
+            "text": text,
+            "character_count": len(text),
+            "word_count": len(text.split()) if text else 0,
+        }
+
+        # Add confidence scores
+        try:
+            data = pytesseract.image_to_data(
+                image, output_type=pytesseract.Output.DICT
+            )
+            confidences = [int(conf) for conf in data["conf"] if int(conf) > 0]
+
+            if confidences:
+                response_data["confidence"] = {
+                    "mean": sum(confidences) / len(confidences),
+                    "min": min(confidences),
+                    "max": max(confidences),
+                }
+        except Exception as e:
+            logger.warning(f"Could not calculate confidence: {str(e)}")
+
+        logger.info(f"Successfully processed URL: {url}")
+        return jsonify(response_data)
 
     except requests.exceptions.RequestException as e:
+        logger.error(f"Request error for URL {url}: {str(e)}")
         return jsonify({"error": f"Failed to download image: {str(e)}"}), 400
     except Exception as e:
         logger.error(f"Error processing URL: {str(e)}")
