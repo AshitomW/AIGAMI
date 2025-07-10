@@ -265,7 +265,7 @@ export default function OCRImportButton() {
                     />
                     <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                     <p className="text-sm text-gray-600 mb-4">
-                      Choose an image or PDF file to extract text from
+                      Choose an image to extract text from
                     </p>
                     <Button
                       variant="outline"
@@ -314,18 +314,18 @@ export default function OCRImportButton() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="url-input">Image or PDF URL</Label>
+                    <Label htmlFor="url-input">Image Url</Label>
                     <Input
                       id="url-input"
                       type="url"
-                      placeholder="https://example.com/document.pdf"
+                      placeholder="https://example.com/example.jpeg"
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
                       className="w-full break-all"
                       style={{ wordBreak: "break-all" }}
                     />
                     <p className="text-xs text-gray-500">
-                      Enter a direct URL to an image or PDF file
+                      Enter a direct URL to an image file
                     </p>
                   </div>
 
